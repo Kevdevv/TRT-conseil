@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/annonce')]
 class AnnonceCandidatController extends AbstractController
 {
+    
     #[Route('/', name: 'app_annonce_candidat', methods: ['GET'])]
     public function index(AnnonceRepository $annonceRepository): Response
     {
