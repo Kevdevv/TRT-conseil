@@ -41,6 +41,20 @@
 			   </li>
 			 {% endif %}
           {% endif %}
+		  {% if app.user %}
+           {% if 'ROLE_CANDIDAT' in app.user.roles %}
+				<li class="nav-item">
+				<a class="nav-link" aria-current="page" href="{{ path('app_user_index') }}">Modifier le profil</a>
+			   </li>
+			 {% endif %}
+          {% endif %}
+		  {% if app.user %}
+           {% if 'ROLE_RECRUTEUR' in app.user.roles %}
+				<li class="nav-item">
+				<a class="nav-link" aria-current="page" href="{{ path('app_user_index') }}">Modifier le profil</a>
+			   </li>
+			 {% endif %}
+          {% endif %}
 				{% if app.user %}
            {% if 'ROLE_ADMIN' in app.user.roles %}
               	<li class="nav-item">
