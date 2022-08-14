@@ -9,6 +9,7 @@ use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
@@ -46,7 +47,7 @@ class UserType extends AbstractType
             ])
             ->add('firstname')
             ->add('lastname')
-            ->add('imageFile', VichImageType::class)
+            ->add('imageFile', FileType::class)
         ;
     }
 

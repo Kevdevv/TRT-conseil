@@ -31,8 +31,16 @@
                 <th>Lastname</th>
                 <td>{{ user.lastname }}</td>
             </tr>
+            <tr>
+                <th>CV</th>
+                <td>{{ user.imagename }}</td>
+            </tr>
         </tbody>
     </table>
+
+<a href="{{ asset('images/recette/' ~ user.imageName) }}">View brochure (PDF)</a>
+
+
 
     <a href="{{ path('app_user_index') }}">back to list</a>
 
