@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/recruteur/annonce')]
-class AnnonceController extends AbstractController
+class AnnonceRecruteurController extends AbstractController
 {
     #[Route('/', name: 'app_annonce_index', methods: ['GET'])]
     public function index(AnnonceRepository $annonceRepository): Response

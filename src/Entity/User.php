@@ -46,6 +46,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $imageName = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $compagny_name = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $address = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -196,6 +202,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
             $this->email,
             $this->password,
         ) = unserialize($serialized);
+    }
+
+    public function getCompagnyName(): ?string
+    {
+        return $this->compagny_name;
+    }
+
+    public function setCompagnyName(?string $compagny_name): self
+    {
+        $this->compagny_name = $compagny_name;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
     }
 
 }

@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Form\UserRecruteurType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Vich\UploaderBundle\Form\Type\VichImageType;
@@ -13,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class UserType extends AbstractType
+class UserRecruteurType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -21,7 +22,7 @@ class UserType extends AbstractType
             ->add('email')
             ->add('roles', ChoiceType::class, [
                 'choices' => [
-                    'Candidat' => 'ROLE_CANDIDAT',
+                    'Recruteur' => 'ROLE_RECRUTEUR'
                 ],
                 'expanded' => true,
                 'multiple' => true,
@@ -46,7 +47,8 @@ class UserType extends AbstractType
             ])
             ->add('firstname')
             ->add('lastname')
-            ->add('imageFile', FileType::class)
+            ->add('compagny_name')
+            ->add('address')
         ;
     }
 
