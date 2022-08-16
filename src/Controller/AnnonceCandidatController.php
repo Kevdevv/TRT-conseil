@@ -14,12 +14,24 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/candidat/annonce')]
 class AnnonceCandidatController extends AbstractController
 {
-    
-    #[Route('/', name: 'app_annonce_candidat', methods: ['GET'])]
-    public function index(AnnonceRepository $annonceRepository): Response
+
+       private $repository;
+
+    public function __construct(AnnonceRepository $repository)
     {
+        $this->repository = $repository;
+
+    }
+    
+    #[Route('/', name: 'app_annonce_candidat')]
+    public function index(): Response
+    
+    {
+
+        $annonces = $this->repository->isValidate();
+
         return $this->render('candidat_annonce/index.html.twig', [
-            'annonces' => $annonceRepository->findAll(),
+            'annonces' => $annonces,
         ]);
     }
 
