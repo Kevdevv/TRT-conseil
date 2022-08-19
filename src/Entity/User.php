@@ -52,6 +52,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $address = null;
 
+    #[ORM\Column (nullable: true)]
+    private ?bool $isValidate = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -224,6 +227,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     public function setAddress(?string $address): self
     {
         $this->address = $address;
+
+        return $this;
+    }
+
+    public function isIsValidate(): ?bool
+    {
+        return $this->isValidate;
+    }
+
+    public function setIsValidate(bool $isValidate): self
+    {
+        $this->isValidate = $isValidate;
 
         return $this;
     }

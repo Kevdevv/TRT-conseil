@@ -53,7 +53,7 @@ class UserController extends AbstractController
             );
              $userRepository->add($user, true);
             $this->addFlash('success', 'L\'utilisateur à été crée avec succès');
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_login', [], Response::HTTP_SEE_OTHER);
 
         }
 
