@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Serializable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
@@ -54,6 +56,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
 
     #[ORM\Column (nullable: true)]
     private ?bool $isValidate = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Candidature::class)]
+    private Collection $postuler;
+
+    public function __construct()
+    {
+        $this->postuler = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -239,6 +249,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     public function setIsValidate(bool $isValidate): self
     {
         $this->isValidate = $isValidate;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Candidature>
+     */
+    public function getPostuler(): Collection
+    {
+        return $this->postuler;
+    }
+
+    public function addPostuler(Candidature $postuler): self
+    {
+        if (!$this->postuler->contains($postuler)) {
+            $this->postuler->add($postuler);
+            $postuler->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostuler(Candidature $postuler): self
+    {
+        if ($this->postuler->removeElement($postuler)) {
+            // set the owning side to null (unless already changed)
+            if ($postuler->getUser() === $this) {
+                $postuler->setUser(null);
+            }
+        }
 
         return $this;
     }

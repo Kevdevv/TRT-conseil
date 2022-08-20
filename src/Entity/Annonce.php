@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AnnonceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,8 +25,16 @@ class Annonce
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?bool $isPublished = null;
+
+    #[ORM\OneToMany(mappedBy: 'annonce', targetEntity: Candidature::class)]
+    private Collection $postulation;
+
+    public function __construct()
+    {
+        $this->postulation = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -75,6 +85,36 @@ class Annonce
     public function setIsPublished(bool $isPublished): self
     {
         $this->isPublished = $isPublished;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Candidature>
+     */
+    public function getPostulation(): Collection
+    {
+        return $this->postulation;
+    }
+
+    public function addPostulation(Candidature $postulation): self
+    {
+        if (!$this->postulation->contains($postulation)) {
+            $this->postulation->add($postulation);
+            $postulation->setAnnonce($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostulation(Candidature $postulation): self
+    {
+        if ($this->postulation->removeElement($postulation)) {
+            // set the owning side to null (unless already changed)
+            if ($postulation->getAnnonce() === $this) {
+                $postulation->setAnnonce(null);
+            }
+        }
 
         return $this;
     }

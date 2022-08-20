@@ -23,6 +23,14 @@
                 <th>Description</th>
                 <td>{{ annonce.description }}</td>
             </tr>
+            <tr>
+                <th>Candidats</th>
+                <td>
+                    {% for c in annonce.postulation %}
+                        {{ c.firstname }} {{ c.lastname }} <a href="{{ asset('images/recette/' ~ c.imageName) }}">Voir le CV</a><br>
+                    {% endfor %}
+                </td>
+            </tr>
         </tbody>
     </table>
 
