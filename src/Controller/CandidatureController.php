@@ -4,11 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Candidature;
 use App\Form\CandidatureType;
+use App\Repository\AnnonceRepository;
 use App\Repository\CandidatureRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/candidature')]
 class CandidatureController extends AbstractController
@@ -22,9 +23,11 @@ class CandidatureController extends AbstractController
     }
 
     #[Route('/new', name: 'app_candidature_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, CandidatureRepository $candidatureRepository): Response
+    public function new(Request $request, CandidatureRepository $candidatureRepository, AnnonceRepository $annonceRepository): Response
     {
-        $candidature = new Candidature();
+        $annonce = $annonceRepository->find($request->query->getInt('id'));
+        $candidature = new Candidature($annonce);
+        //dd($candidature);
         $form = $this->createForm(CandidatureType::class, $candidature);
         $form->handleRequest($request);
 

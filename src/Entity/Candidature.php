@@ -38,6 +38,11 @@ class Candidature
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $imageName = null;
 
+    public function __construct(Annonce $a)
+    {
+        $this->annonce = $a;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -21,14 +21,7 @@ class CandidatureType extends AbstractType
         $builder
             ->add('firstname')
             ->add('lastname')
-            ->add('imageFile', FileType::class)
-            ->add('annonce',EntityType::class, [
-                'class' => Annonce::class,
-                'choice_label' => 'title',
-                'multiple' => false,
-                'required' => true,
-            ])
-            
+            ->add('imageFile', FileType::class)            
         ;
     }
 
