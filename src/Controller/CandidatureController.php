@@ -14,11 +14,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/candidature')]
 class CandidatureController extends AbstractController
 {
-    #[Route('/', name: 'app_candidature_index', methods: ['GET'])]
-    public function index(CandidatureRepository $candidatureRepository): Response
+
+           private $repository;
+
+    public function __construct(CandidatureRepository $repository)
     {
+        $this->repository = $repository;
+
+    }
+
+    #[Route('/', name: 'app_candidature_index', methods: ['GET'])]
+    public function index(): Response
+    {
+        $candidatures = $this->repository->isCandidatureValidate();
+
         return $this->render('candidature/index.html.twig', [
-            'candidatures' => $candidatureRepository->findAll(),
+            'candidatures' => $candidatures,
         ]);
     }
 
@@ -27,7 +38,6 @@ class CandidatureController extends AbstractController
     {
         $annonce = $annonceRepository->find($request->query->getInt('id'));
         $candidature = new Candidature($annonce);
-        //dd($candidature);
         $form = $this->createForm(CandidatureType::class, $candidature);
         $form->handleRequest($request);
 

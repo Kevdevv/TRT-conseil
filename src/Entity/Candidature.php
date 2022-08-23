@@ -38,6 +38,9 @@ class Candidature
     #[ORM\Column(type: 'string', nullable: true)]
     private ?string $imageName = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isCandidatureValidate = null;
+
     public function __construct(Annonce $a)
     {
         $this->annonce = $a;
@@ -134,5 +137,17 @@ class Candidature
     public function setImageSize(?int $imageSize): void
     {
         $this->imageSize = $imageSize;
+    }
+
+    public function isIsCandidatureValidate(): ?bool
+    {
+        return $this->isCandidatureValidate;
+    }
+
+    public function setIsCandidatureValidate(?bool $isCandidatureValidate): self
+    {
+        $this->isCandidatureValidate = $isCandidatureValidate;
+
+        return $this;
     }
 }

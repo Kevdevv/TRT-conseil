@@ -27,7 +27,9 @@
                 <th>Candidats</th>
                 <td>
                     {% for c in annonce.postulation %}
-                        {{ c.firstname }} {{ c.lastname }} <a href="{{ asset('images/recette/' ~ c.imageName) }}">Voir le CV</a><br>
+                        {% if c.isCandidatureValidate == true %}
+                            {{ c.firstname }} {{ c.lastname }} <a href="{{ asset('images/recette/' ~ c.imageName) }}">Voir le CV</a><br>
+                        {% endif %}
                     {% endfor %}
                 </td>
             </tr>
