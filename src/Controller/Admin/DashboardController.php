@@ -13,7 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class DashboardController extends AbstractDashboardController
 {
-    #[Route('/admin', name: 'admin')]
+    #[Route('/consultant', name: 'consultant')]
     public function index(): Response
     {
         return $this->render('admin/dashboard.html.twig');
@@ -38,14 +38,14 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Monsieur le consultant');
+            ->setTitle('Bonjour Monsieur le consultant');
     }
 
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Annonce', 'fas fa-newspaper', Annonce::class);
-        yield MenuItem::linkToCrud('Utilisateur', 'fa-solid fa-users', User::class);
-        yield MenuItem::linkToCrud('Candidature', 'fas fa-newspaper', Candidature::class);
+        yield MenuItem::linkToCrud('Annonces', 'fas fa-newspaper', Annonce::class);
+        yield MenuItem::linkToCrud('Utilisateurs', 'fa-solid fa-users', User::class);
+        yield MenuItem::linkToCrud('Candidatures', 'fa-solid fa-file-pen', Candidature::class);
     }
 }

@@ -4,8 +4,12 @@ namespace App\Entity;
 
 
 use DateTimeImmutable;
+use App\Mail\MailService;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mailer\Mailer;
 use App\Repository\CandidatureRepository;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -49,14 +53,13 @@ class Candidature
 
     #[ORM\PostPersist]
     #[ORM\PostUpdate]
-    public function sendmail()
+    public function whenvalidate()
     {
         if ($this->isIsCandidatureValidate())
         {
-            $mail = $this->getAnnonce()->getOwner()->getEmail();
-            //fonction pushmail($mail, $this);
-            //dans la fonction mail $this->getfirstname, $this->getImageFile()
-            dump('le mail doit partir',$mail);
+            //$mail = $this->getAnnonce()->getOwner()->getEmail();
+            //$mailService = new MailService();
+            //$mailService->sendmail(to: $mail, content: "coucou", subject: "mail de test", text: "coucou prout");          
         }
     }
 
