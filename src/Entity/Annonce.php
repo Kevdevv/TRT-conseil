@@ -31,6 +31,9 @@ class Annonce
     #[ORM\OneToMany(mappedBy: 'annonce', targetEntity: Candidature::class)]
     private Collection $postulation;
 
+    #[ORM\ManyToOne(inversedBy: 'annonces')]
+    private ?User $owner = null;
+
     public function __construct()
     {
         $this->postulation = new ArrayCollection();
@@ -115,6 +118,18 @@ class Annonce
                 $postulation->setAnnonce(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }

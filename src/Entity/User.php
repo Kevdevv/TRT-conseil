@@ -60,9 +60,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Candidature::class)]
     private Collection $postuler;
 
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Annonce::class)]
+    private Collection $annonces;
+
     public function __construct()
     {
         $this->postuler = new ArrayCollection();
+        $this->annonces = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -277,6 +281,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Seriali
             // set the owning side to null (unless already changed)
             if ($postuler->getUser() === $this) {
                 $postuler->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Annonce>
+     */
+    public function getAnnonces(): Collection
+    {
+        return $this->annonces;
+    }
+
+    public function addAnnonce(Annonce $annonce): self
+    {
+        if (!$this->annonces->contains($annonce)) {
+            $this->annonces->add($annonce);
+            $annonce->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnnonce(Annonce $annonce): self
+    {
+        if ($this->annonces->removeElement($annonce)) {
+            // set the owning side to null (unless already changed)
+            if ($annonce->getOwner() === $this) {
+                $annonce->setOwner(null);
             }
         }
 
