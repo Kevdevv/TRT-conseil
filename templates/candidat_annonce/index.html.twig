@@ -3,12 +3,11 @@
 {% block title %}Annonce index{% endblock %}
 
 {% block body %}
-    <h1>Annonce index</h1>
+    <h1>Annonces</h1>
 
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Title</th>
                 <th>Place</th>
                 <th>Description</th>
@@ -18,13 +17,12 @@
         <tbody>
         {% for annonce in annonces %}
             <tr>
-                <td>{{ annonce.id }}</td>
                 <td>{{ annonce.title }}</td>
                 <td>{{ annonce.place }}</td>
                 <td>{{ annonce.description }}</td>
                 <td>
-                    <a href="{{ path('app_annonce_candidat_show', {'id': annonce.id}) }}">show</a>
-                    <a href="{{ path('app_candidature_new', {'id': annonce.id}) }}">postuler</a>
+                    <a class="btn btn-info" href="{{ path('app_annonce_candidat_show', {'id': annonce.id}) }}">show</a>
+                    <a class="btn btn-primary ms-3" href="{{ path('app_candidature_new', {'id': annonce.id}) }}">postuler</a>
                 </td>
             </tr>
         {% else %}

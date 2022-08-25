@@ -3,9 +3,9 @@
 {% block title %}New User{% endblock %}
 
 {% block body %}
-    <h1>Create new User</h1>
-
+    <h1>S'inscrire en tant que candidat</h1>
+<div class="container">
     {{ include('user/_form.html.twig') }}
-
-    <a href="{{ path('app_login') }}">Se connecter</a>
+    <a class="btn btn-info mt-3" href="{{ path('app_login') }}">retour</a>
+</div> 
 {% endblock %}

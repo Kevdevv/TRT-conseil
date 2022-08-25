@@ -1,16 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Annonce{% endblock %}
+{% block title %}Annonces{% endblock %}
 
 {% block body %}
-    <h1>Annonce</h1>
+    <h1>Annonces</h1>
 
-    <table class="table">
+    <table class="table table-striped">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ annonce.id }}</td>
-            </tr>
             <tr>
                 <th>Title</th>
                 <td>{{ annonce.title }}</td>
@@ -25,8 +21,8 @@
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('app_annonce_candidat') }}">back to list</a>
+    <a class="btn btn-primary ms-3" href="{{ path('app_candidature_new', {'id': annonce.id}) }}">postuler</a>
+    <a class="btn btn-info" href="{{ path('app_annonce_candidat') }}">back to list</a>
 
 
 

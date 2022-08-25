@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[ORM\Entity(repositoryClass: CandidatureRepository::class)]
 #[Vich\Uploadable]
-#[ORM\HasLifecycleCallbacks]
 class Candidature
 {
     #[ORM\Id]
@@ -49,18 +48,6 @@ class Candidature
     public function __construct(Annonce $a)
     {
         $this->annonce = $a;
-    }
-
-    #[ORM\PostPersist]
-    #[ORM\PostUpdate]
-    public function whenvalidate()
-    {
-        if ($this->isIsCandidatureValidate())
-        {
-            //$mail = $this->getAnnonce()->getOwner()->getEmail();
-            //$mailService = new MailService();
-            //$mailService->sendmail(to: $mail, content: "coucou", subject: "mail de test", text: "coucou prout");          
-        }
     }
 
     public function getId(): ?int

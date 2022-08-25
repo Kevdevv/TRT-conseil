@@ -5,10 +5,9 @@
 {% block body %}
     <h1>Candidature index</h1>
 
-    <table class="table">
+    <table class="table table-striped">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Firstname</th>
                 <th>Lastname</th>
                 <th>actions</th>
@@ -17,12 +16,11 @@
         <tbody>
         {% for candidature in candidatures %}
             <tr>
-                <td>{{ candidature.id }}</td>
                 <td>{{ candidature.firstname }}</td>
                 <td>{{ candidature.lastname }}</td>
                 <td>
-                    <a href="{{ path('app_candidature_show', {'id': candidature.id}) }}">show</a>
-                    <a href="{{ path('app_candidature_edit', {'id': candidature.id}) }}">edit</a>
+                    <a class="btn btn-info" href="{{ path('app_candidature_show', {'id': candidature.id}) }}">voir</a>
+                    <a class="btn btn-primary" href="{{ path('app_candidature_edit', {'id': candidature.id}) }}">modifier</a>
                 </td>
             </tr>
         {% else %}
