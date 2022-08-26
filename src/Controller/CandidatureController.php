@@ -26,10 +26,9 @@ class CandidatureController extends AbstractController
     #[Route('/', name: 'app_candidature_index', methods: ['GET'])]
     public function index(): Response
     {
-        $candidatures = $this->repository->isCandidatureValidate();
 
         return $this->render('candidature/index.html.twig', [
-            'candidatures' => $candidatures,
+            'candidatures' => $this->repository->findAll(),
         ]);
     }
 
@@ -44,7 +43,7 @@ class CandidatureController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $candidatureRepository->add($candidature, true);
 
-            return $this->redirectToRoute('app_candidature_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_annonce_candidat', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('candidature/new.html.twig', [
