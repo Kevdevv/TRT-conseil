@@ -1,33 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Annonce index{% endblock %}
+{% block title %}Publier{% endblock %}
 
 {% block body %}
-    <h1>Annonce index</h1>
+    <h1>Publier une annonce</h1>
 
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Title</th>
-                <th>Place</th>
+                <th>Titre</th>
+                <th>Adresse</th>
                 <th>Description</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for annonce in annonces %}
-            <tr>
-                <td>{{ annonce.title }}</td>
-                <td>{{ annonce.place }}</td>
-                <td>{{ annonce.description }}</td>
-                <td>
-                    <a class="btn btn-info" href="{{ path('app_annonce_show', {'id': annonce.id}) }}">voir</a>
-                    <a class="btn btn-primary" href="{{ path('app_annonce_edit', {'id': annonce.id}) }}">modifier</a>
-                </td>
-            </tr>
+            {% if app.user.id == annonce.owner.id %}
+                <tr>
+                    <td>{{ annonce.title }}</td>
+                    <td>{{ annonce.place }}</td>
+                    <td>{{ annonce.description }}</td>
+                    <td>
+                        <a class="btn btn-info" href="{{ path('app_annonce_show', {'id': annonce.id}) }}">Voir</a>
+                        <a class="btn btn-primary" href="{{ path('app_annonce_edit', {'id': annonce.id}) }}">Modifier</a>
+                    </td>
+                </tr>
+            {% endif %}
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">Aucune annonce</td>
             </tr>
         {% endfor %}
         </tbody>

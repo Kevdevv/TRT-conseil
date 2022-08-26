@@ -8,8 +8,8 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Firstname</th>
-                <th>Lastname</th>
+                <th>Prénom</th>
+                <th>Nom</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -19,8 +19,8 @@
                 <td>{{ candidature.firstname }}</td>
                 <td>{{ candidature.lastname }}</td>
                 <td>
-                    <a class="btn btn-info" href="{{ path('app_candidature_show', {'id': candidature.id}) }}">voir</a>
-                    <a class="btn btn-primary" href="{{ path('app_candidature_edit', {'id': candidature.id}) }}">modifier</a>
+                    <a class="btn btn-info" href="{{ path('app_candidature_show', {'id': candidature.id}) }}">Voir</a>
+                    <a class="btn btn-primary" href="{{ path('app_candidature_edit', {'id': candidature.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +31,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_candidature_new') }}">Create new</a>
+    <a href="{{ path('app_candidature_new') }}">Nouvelle candidature</a>
 {% endblock %}

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Annonce index{% endblock %}
+{% block title %}Annonces{% endblock %}
 
 {% block body %}
     <h1>Annonces</h1>
@@ -8,8 +8,8 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Title</th>
-                <th>Place</th>
+                <th>Titre</th>
+                <th>Adresse</th>
                 <th>Description</th>
                 <th>actions</th>
             </tr>
@@ -21,13 +21,13 @@
                 <td>{{ annonce.place }}</td>
                 <td>{{ annonce.description }}</td>
                 <td>
-                    <a class="btn btn-info" href="{{ path('app_annonce_candidat_show', {'id': annonce.id}) }}">show</a>
-                    <a class="btn btn-primary ms-3" href="{{ path('app_candidature_new', {'id': annonce.id}) }}">postuler</a>
+                    <a class="btn btn-info" href="{{ path('app_annonce_candidat_show', {'id': annonce.id}) }}">Voir</a>
+                    <a class="btn btn-primary ms-3" href="{{ path('app_candidature_new', {'id': annonce.id}) }}">Postuler</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">Aucune annonces</td>
             </tr>
         {% endfor %}
         </tbody>

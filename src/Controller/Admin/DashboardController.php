@@ -39,6 +39,7 @@ class DashboardController extends AbstractDashboardController
     {
         return Dashboard::new()
             ->setTitle('Bonjour Monsieur le consultant');
+            //->setTranslationDomain('consultant');
     }
 
     public function configureMenuItems(): iterable
